@@ -36,13 +36,15 @@ transactions_df = transactions_dyf.toDF()
 #Filtro del DF
 transactions_df = transactions_df.filter(col("City") == "Madrid")
 
-#filtered_df.show()
+#Mostrar tabla filtrada
+filtered_df.show()
 
 #Columnas Calculadas
 transactions_df = transactions_df.withColumn('valor_alto' ,when(col("amount") > 100.0, True ).otherwise(False)
                     ).withColumn('ultimos_digitos',substring(col("card_number"),-4,4)
                     )
 
+#Mostrar la tabla
 transactions_df.show()
 
 #Convertir DF a DYF                   
