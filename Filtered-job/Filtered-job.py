@@ -57,7 +57,7 @@ final_dyf = DynamicFrame.fromDF(transactions_df,glueContext,"final_dyf")
 write_final_dyf =glueContext.write_dynamic_frame.from_options(
                     frame = final_dyf,
                     connection_type = "S3", 
-                    connection_options={"paths":["s3://bucket-bootcamp-silver-0001/scripts-py/transactions-outputs/"]}, 
+                    connection_options={"path":"s3://bucket-bootcamp-silver-0001/scripts-py/transactions-outputs/"}, 
                     format="parquet", 
                     transformation_ctx="write_final_dyf"
                 )
