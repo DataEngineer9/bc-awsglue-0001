@@ -40,7 +40,7 @@ transactions_df = transactions_dyf.toDF()
 transactions_df = transactions_df.filter(col("City") == "Madrid")
 
 #Mostrar filtro
-filtered_df.show()
+transactions_df.show()
 
 #Columnas Calculadas
 transactions_df = transactions_df.withColumn('valor_alto' ,when(col("amount") > 100.0, True ).otherwise(False)
