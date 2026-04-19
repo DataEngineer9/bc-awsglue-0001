@@ -14,12 +14,14 @@ args = getResolvedOptions(sys.argv, ['JOB_NAME'])
 # Ruta S3:
 s3_path = f"s3://bucket-bootcamp-bronze-0001/scripts-py/transactions/cards_transactions.csv"
 
+#Iniciar argumento
 sc = SparkContext()
 glueContext = GlueContext(sc)
 spark = glueContext.spark_session
 job = Job(glueContext)
 job.init(args['JOB_NAME'], args)
 
+#Crear DYF
 transactions_dyf = glueContext.create_dynamic_frame.from_options(
     connection_type="s3",
     connection_options={"paths": [s3_path]},
@@ -31,6 +33,7 @@ transactions_dyf = glueContext.create_dynamic_frame.from_options(
     }
 )
 
+#Convertir DYF a DF
 transactions_df = transactions_dyf.toDF()
 
 #Filtro del DF
@@ -43,6 +46,7 @@ transactions_df = transactions_df.withColumn('valor_alto' ,when(col("amount") > 
                     ).withColumn('ultimos_digitos',substring(col("card_number"),-4,4)
                     )
 
+#Mostrar cambios
 transactions_df.show()
 
 #Convertir DF a DYF                   
