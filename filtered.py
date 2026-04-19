@@ -14,7 +14,7 @@ args = getResolvedOptions(sys.argv, ['JOB_NAME'])
 # Ruta S3:
 s3_path = f"s3://bucket-bootcamp-bronze-0001/scripts-py/transactions/cards_transactions.csv"
 
-#Iniciar argumentos
+#Iniciar argumento
 sc = SparkContext()
 glueContext = GlueContext(sc)
 spark = glueContext.spark_session
