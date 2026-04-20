@@ -12,8 +12,8 @@ import time
 
 
 ## @params: [JOB_NAME]
-#args = getResolvedOptions(sys.argv, ['JOB_NAME'])
-args = getResolvedOptions(sys.argv, ['JOB_NAME','JOB_RUN_ID'])
+args = getResolvedOptions(sys.argv, ['JOB_NAME'])
+#args = getResolvedOptions(sys.argv, ['JOB_NAME','JOB_RUN_ID'])
 
 # Ruta S3:
 s3_path = f"s3://bucket-bootcamp-bronze-0001/scripts-py/transactions/cards_transactions.csv"
@@ -59,7 +59,8 @@ final_dyf = DynamicFrame.fromDF(transactions_df,glueContext,"final_dyf")
 
 
 bucket = "bucket-bootcamp-silver-0001"
-run_id = args['JOB_RUN_ID']
+run_id = str(int(time.time()))
+#run_id = args['JOB_RUN_ID']
 # Ruta temporal única por ejecución
 temp_prefix = f"tmp/transactions/{run_id}/"
 # Nombre final del parquet
